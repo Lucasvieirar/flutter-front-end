@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/widgets/InputCustom.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,29 +52,14 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 40),
-
-                // Email
-                TextField(
-                  controller: emailController,
-                  decoration: const InputDecoration(
-                    labelText: "Email",
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.email),
-                  ),
-                ),
+                
+                //Email
+                 InputCustom(controller: senhaController, label: "Email", icon: Icons.lock, obscureText: false,),
                 const SizedBox(height: 20),
-
-                // Senha
-                TextField(
-                  controller: senhaController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: "Senha",
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.lock),
-                  ),
-                ),
+                //Senha
+                InputCustom(controller: senhaController, label: "Senha", icon: Icons.email, obscureText: false,),
                 const SizedBox(height: 10),
+                
 
                 // Esqueci senha
                 Align(
