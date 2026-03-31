@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/widgets/InputCustom.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,102 +9,185 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'KiTreino',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-      ),
-      home: const LoginPage(),
+      home: LoginPage(),
     );
   }
 }
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final emailController = TextEditingController();
-    final senhaController = TextEditingController();
+  State<LoginPage> createState() => _LoginPageState();
+}
 
+class _LoginPageState extends State<LoginPage> {
+  bool _obscurePassword = true;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Center(
-          child: SingleChildScrollView(
+      backgroundColor: const Color(0xFF050B10),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.fitness_center,
-                  size: 80,
-                  color: Colors.blue,
+                // Ícone substituindo a logo
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Icon(
+                    Icons.fitness_center,
+                    size: 40,
+                    color: Color(0xFF00C853),
+                  ),
                 ),
-                const SizedBox(height: 20),
+
+                const SizedBox(height: 32),
+
                 const Text(
-                  "KiTreino",
-                  textAlign: TextAlign.center,
+                  "Bem-vindo de volta",
                   style: TextStyle(
-                    fontSize: 32,
+                    color: Colors.white,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 40),
-                
-                //Email
-                 InputCustom(controller: senhaController, label: "Email", icon: Icons.lock, obscureText: false,),
-                const SizedBox(height: 20),
-                //Senha
-                InputCustom(controller: senhaController, label: "Senha", icon: Icons.email, obscureText: false,),
-                const SizedBox(height: 10),
-                
 
-                // Esqueci senha
+                const SizedBox(height: 8),
+
+                const Text(
+                  "Entre na sua conta para continuar",
+                  style: TextStyle(
+                    color: Colors.white54,
+                    fontSize: 14,
+                  ),
+                ),
+
+                const SizedBox(height: 32),
+
+                // Campo email
+                _buildInputField(
+                  hint: "Seu e-mail",
+                ),
+
+                const SizedBox(height: 16),
+
+                // Campo senha
+                _buildInputField(
+                  hint: "Sua senha",
+                  isPassword: true,
+                ),
+
+                const SizedBox(height: 12),
+
                 Align(
-                  alignment: Alignment.centerRight,
+                  alignment: Alignment.centerLeft,
                   child: TextButton(
-                    onPressed: () {
-                      // ação futura
-                    },
-                    child: const Text("Esqueci a senha"),
+                    onPressed: () {},
+                    child: const Text(
+                      "Esqueceu a senha?",
+                      style: TextStyle(
+                        color: Color(0xFF00C853),
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                // Botão Entrar
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF00C853),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      "Entrar",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
 
                 const SizedBox(height: 20),
 
-                // Botão entrar
-                ElevatedButton(
-                  onPressed: () {
-                    // ação de login
-                    print("Email: ${emailController.text}");
-                    print("Senha: ${senhaController.text}");
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16), backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                  ), 
-                  child: const Text("Entrar"), 
-                ),
-
-                const SizedBox(height: 20),
-
-                // Criar conta
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Não tem conta? "),
-                    TextButton(
-                      onPressed: () {
-                        // ação futura
-                      },
-                      child: const Text("Criar conta"),
+                  children: const [
+                    Text(
+                      "Não tem uma conta? ",
+                      style: TextStyle(color: Colors.white54),
+                    ),
+                    Text(
+                      "Cadastre-se",
+                      style: TextStyle(
+                        color: Color(0xFF00C853),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInputField({
+    required String hint,
+    bool isPassword = false,
+  }) {
+    return TextField(
+      obscureText: isPassword ? _obscurePassword : false,
+      style: const TextStyle(color: Colors.white),
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: const TextStyle(color: Colors.white54),
+        filled: true,
+        fillColor: const Color(0xFF1C242C),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: 16,
+        ),
+        suffixIcon: isPassword
+            ? IconButton(
+                icon: Icon(
+                  _obscurePassword
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  color: Colors.white54,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _obscurePassword = !_obscurePassword;
+                  });
+                },
+              )
+            : null,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
         ),
       ),
     );
