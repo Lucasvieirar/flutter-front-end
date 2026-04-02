@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/features/auth/begin.dart';
 import 'core/theme/theme.dart';
-import 'features/auth/loginPage.dart';
+import 'features/auth/begin.dart';
 
 void main() => runApp(const MyApp());
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'KiTreino',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.dark,
-      home: const LoginPage(),
+      home: const BeginPage(),
     );
   }
 }

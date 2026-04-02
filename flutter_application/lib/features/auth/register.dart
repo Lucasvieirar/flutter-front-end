@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/features/homePage.dart';
 import '../../core/theme/theme.dart';
 import '../../shared/widgets/widgets.dart';
 
@@ -54,6 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _handleRegister() {
-    // TODO: implement register logic
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomePage()),
+    );
   }
 }
