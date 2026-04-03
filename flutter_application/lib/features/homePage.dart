@@ -3,8 +3,8 @@ import 'package:flutter_application/shared/widgets/appBadge.dart';
 import 'package:flutter_application/shared/widgets/appBottom.dart';
 import 'package:flutter_application/shared/widgets/createWorkoutCard.dart';
 import 'package:flutter_application/shared/widgets/workoutDart.dart';
+import 'package:flutter_application/core/animations/staggeredFade.dart';
 import '../../core/theme/theme.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,79 +28,98 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── Header ──────────────────────────────────────
-              const Text('Olá, atleta 👋',
-                  style: TextStyle(
-                    color: AppColors.textSecondary,
-                    fontSize: 14,
-                  )),
+              // ── Header ──────────────────────────────
+              StaggeredFade(
+                index: 0,
+                child: const Text('Olá, atleta 👋',
+                    style: TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 14,
+                    )),
+              ),
               const SizedBox(height: 4),
-              const Text('Seus Treinos',
-                  style: TextStyle(
-                    color: AppColors.textPrimary,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  )),
+              StaggeredFade(
+                index: 1,
+                child: const Text('Seus Treinos',
+                    style: TextStyle(
+                      color: AppColors.textPrimary,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
 
               const SizedBox(height: AppSpacing.lg),
 
-              // ── Criar treino ─────────────────────────────────
-              CreateWorkoutCard(onTap: () {}),
-
-              const SizedBox(height: AppSpacing.md),
-
-              // ── Lista de treinos ─────────────────────────────
-              WorkoutCard(
-                icon: Icons.local_fire_department,
-                title: 'Treino A — Peito e Tríceps',
-                subtitle: 'Supino, crucifixo, tríceps testa e mergulho',
-                exercises: 6,
-                minutes: 45,
-                level: BadgeLevel.intermediario,
-                onTap: () {},
+              // ── Criar treino ─────────────────────────
+              StaggeredFade(
+                index: 2,
+                child: CreateWorkoutCard(onTap: () {}),
               ),
 
               const SizedBox(height: AppSpacing.md),
 
-              WorkoutCard(
-                icon: Icons.bolt,
-                title: 'Treino B — Costas e Bíceps',
-                subtitle: 'Puxada, remada, rosca direta e martelo',
-                exercises: 6,
-                minutes: 50,
-                level: BadgeLevel.intermediario,
-                onTap: () {},
+              // ── Lista de treinos ─────────────────────
+              StaggeredFade(
+                index: 3,
+                child: WorkoutCard(
+                  icon: Icons.local_fire_department,
+                  title: 'Treino A — Peito e Tríceps',
+                  subtitle: 'Supino, crucifixo, tríceps testa e mergulho',
+                  exercises: 6,
+                  minutes: 45,
+                  level: BadgeLevel.intermediario,
+                  onTap: () {},
+                ),
               ),
 
               const SizedBox(height: AppSpacing.md),
 
-              WorkoutCard(
-                icon: Icons.radio_button_checked,
-                title: 'Treino C — Pernas',
-                subtitle: 'Agachamento, leg press, extensora e stiff',
-                exercises: 7,
-                minutes: 55,
-                level: BadgeLevel.avancado,
-                onTap: () {},
+              StaggeredFade(
+                index: 4,
+                child: WorkoutCard(
+                  icon: Icons.bolt,
+                  title: 'Treino B — Costas e Bíceps',
+                  subtitle: 'Puxada, remada, rosca direta e martelo',
+                  exercises: 6,
+                  minutes: 50,
+                  level: BadgeLevel.intermediario,
+                  onTap: () {},
+                ),
               ),
 
               const SizedBox(height: AppSpacing.md),
 
-              WorkoutCard(
-                icon: Icons.local_fire_department,
-                title: 'Treino D — Ombros e Abdômen',
-                subtitle: 'Desenvolvimento, elevação lateral e prancha',
-                exercises: 5,
-                minutes: 40,
-                level: BadgeLevel.iniciante,
-                onTap: () {},
+              StaggeredFade(
+                index: 5,
+                child: WorkoutCard(
+                  icon: Icons.radio_button_checked,
+                  title: 'Treino C — Pernas',
+                  subtitle: 'Agachamento, leg press, extensora e stiff',
+                  exercises: 7,
+                  minutes: 55,
+                  level: BadgeLevel.avancado,
+                  onTap: () {},
+                ),
+              ),
+
+              const SizedBox(height: AppSpacing.md),
+
+              StaggeredFade(
+                index: 6,
+                child: WorkoutCard(
+                  icon: Icons.local_fire_department,
+                  title: 'Treino D — Ombros e Abdômen',
+                  subtitle: 'Desenvolvimento, elevação lateral e prancha',
+                  exercises: 5,
+                  minutes: 40,
+                  level: BadgeLevel.iniciante,
+                  onTap: () {},
+                ),
               ),
             ],
           ),
         ),
       ),
-
-      // ── Bottom Nav ────────────────────────────────────────────
       bottomNavigationBar: AppBottomNav(
         currentIndex: _navIndex,
         onTap: (i) => setState(() => _navIndex = i),

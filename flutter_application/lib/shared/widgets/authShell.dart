@@ -5,25 +5,7 @@ import '../../core/theme/theme.dart';
 import 'appLogo.dart';
 import 'appText.dart';
 
-/// The outer scaffold shared by every authentication screen.
-///
-/// Pass a list of [fields] (inputs, buttons, etc.) and the shell
-/// takes care of:
-///   - dark background
-///   - centered scrollable layout
-///   - staggered-fade logo → title → subtitle → fields
-///
-/// ```dart
-/// AuthShell(
-///   title: 'Bem-vindo',
-///   subtitle: 'Entre com sua Conta',
-///   fields: [
-///     AppInput(hint: 'Email', ...),
-///     AppButton(text: 'Entrar', ...),
-///   ],
-///   footer: Row(...), // optional link row at the bottom
-/// )
-/// ```
+
 class AuthShell extends StatelessWidget {
   final String title;
   final String subtitle;
